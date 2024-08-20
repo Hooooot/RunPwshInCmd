@@ -5,7 +5,7 @@ Allow you to directly write PowerShell commands in bat scripts.
 
 * No need to execute the `Set-ExecutionPolicy` command
 * Script parameters can be retained
-* Apart from known issues, you can write your script directly in the `.bat` file, just like in the `.ps1`/`. psm1` files
+* Apart from known issues, you can write your script directly in the `.bat` file, just like in the `.ps1`/`.psm1` files
 
 ## Known issues
 
