@@ -9,7 +9,7 @@ Allow you to directly write PowerShell commands in bat scripts.
 
 ## Known issues
 
-- `$pwd`, `$MyInvocation.MyCommand.Definition`, `$PSScriptRoot` cannot be use.
+- `$MyInvocation.MyCommand.Definition`, `$PSScriptRoot` cannot be use.
 - - But some built-in variables defined by the script can solve this problem.
 
 ## Description
