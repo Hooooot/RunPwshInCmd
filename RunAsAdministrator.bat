@@ -20,6 +20,9 @@ Write-Output "`$ScriptName = $ScriptName"
 Write-Output "`$DirectoryPath = $DirectoryPath"
 Write-Output "`$PSScriptRoot = $PSScriptRoot"
 Write-Output "`$Get-Location = $(Get-Location)"
+Write-Output "`$pwd = $pwd"
+Write-Output "`$MyInvocation.MyCommand.Definition = $($MyInvocation.MyCommand.Definition)"
 Write-Output "`$args.Count = $($args.Count)"
 Write-Output "`$args = $args"
 Pause
+
