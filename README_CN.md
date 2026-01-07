@@ -9,7 +9,7 @@
 
 ## 已知问题
 
-- `Get-Location`, `$pwd`, `$MyInvocation.MyCommand.Definition`, `$PSScriptRoot` 无法被使用
+- `$pwd`, `$MyInvocation.MyCommand.Definition`, `$PSScriptRoot` 无法被使用
 - - 但是脚本定义的一些内置变量可以解决这个问题
 
 ## 说明
