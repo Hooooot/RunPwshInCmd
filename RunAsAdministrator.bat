@@ -1,21 +1,25 @@
 <# :
     @echo off
+    set "administrator=-Verb RunAs"
+    @REM set "administrator=-NoNewWindow"
+    
     setlocal enabledelayedexpansion
     set arg="%~f0"
     for %%x in (%*) do set arg=!arg! /, "%%x"
-    start /b powershell /nologo /noprofile /command ^
-"Start-Process powershell -Verb RunAs '/nologo /noprofile /command ^
-"""^&{ $ScriptPath="""""""""%~f0"""""""""; $ScriptName="""""""""%~xn0"""""""""; $Path="""""""""%~dp0"""""""""; Set-Location $Path; ^
-    icm ([scriptblock]::Create((gc $ScriptPath -Raw))) -ArgumentList ("""""""""!arg!""""""""" -split """"""""" /, """""""""); }""" '"
+    set "InitScript=Set-Location '%~dp0'; New-Variable -Name "ScriptPath" -Value '%~f0' -Option ReadOnly; "
+    set "InitScript=%InitScript% New-Variable -Name "ScriptName" -Value '%~xn0' -Option ReadOnly; New-Variable -Name "DirectoryPath" -Value '%~dp0' -Option ReadOnly; "
+    set "InitScript=%InitScript% Invoke-Command ([scriptblock]::Create((gc `$ScriptPath -Raw))) -ArgumentList ('!arg!' -split ' /, '); "
+    start /b powershell -NoProfile -NoLogo -Command "&{ Start-Process powershell %administrator% -ArgumentList @('-NoProfile', '-NoLogo', '-Command', \"%InitScript%\") }"
     endlocal
     exit /B
 #>
 
-# write your powershell command here
-
 $PSDefaultParameterValues['*:Encoding'] = 'utf8'
-Write-Host $ScriptPath
-Write-Host $ScriptName
-Write-Host $Path
-Write-Output $args
-pause
+Write-Output "`$ScriptPath = $ScriptPath"
+Write-Output "`$ScriptName = $ScriptName"
+Write-Output "`$DirectoryPath = $DirectoryPath"
+Write-Output "`$PSScriptRoot = $PSScriptRoot"
+Write-Output "`$Get-Location = $(Get-Location)"
+Write-Output "`$args.Count = $($args.Count)"
+Write-Output "`$args = $args"
+Pause
